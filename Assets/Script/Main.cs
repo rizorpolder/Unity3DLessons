@@ -9,6 +9,8 @@ namespace FPS
         //public Camera camera;
         public MouseMove mouseMove;
         public PlayerController playerController;
+        public CameraController cameraController;
+        public Camera MainCamera { get; private set; }
         public Transform player { get; private set; }
         private BaseController[] _controllers;
         public static Main Instance { get; private set; }
@@ -16,13 +18,15 @@ namespace FPS
         void Awake()
         {
             Instance = this;
-            //camera = Camera.main;
+            MainCamera = Camera.main;
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerController = new PlayerController(new PlayerMove(player));
-            //playerController = new PlayerController(new MouseMove(player));
-            _controllers = new BaseController[1]
+            cameraController = new CameraController(MainCamera, player);
+            cameraController.On();
+            _controllers = new BaseController[2]
             {
                playerController,
+               cameraController,
             };
         }
 

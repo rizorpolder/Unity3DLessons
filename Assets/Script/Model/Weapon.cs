@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace FPS
 {
-    abstract class Weapon : BaseObjectScene
+   public abstract class Weapon : BaseObjectScene
     {
         protected Transform transform;
         protected float force = 999;

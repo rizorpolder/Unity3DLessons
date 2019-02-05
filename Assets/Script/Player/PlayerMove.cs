@@ -11,9 +11,8 @@ namespace FPS
     public class PlayerMove:IMove
     {
        
-        public float chJumpForce = 5f;
+        public float chJumpForce = 10f;
         public float runCycleOffset = 0.2f;
-       
         private float _chSpeed = 2f;
         private float _chDefaultSpeed = 2f;
         private float _gravityFoce;
@@ -44,14 +43,23 @@ namespace FPS
 
         public void Move()
         {
+            
             CharacterMove();
             CharacterCrouch(Input.GetKeyDown(KeyCode.C));
+            CharacterRun(Input.GetKey(KeyCode.LeftShift));
             CharacterGravity();
             UpdateAnimator(_charDirection);
-
+           
         }
 
-
+        private void CharacterRun(bool ispressed)
+        {
+            if (ispressed && _charDirection.z>0) _chSpeed = 4f;
+            else
+            {
+                _chSpeed = _chDefaultSpeed;
+            }
+        }
         private void CharacterMove()
         {
             if (_characterController.isGrounded)
@@ -60,10 +68,14 @@ namespace FPS
                                _instance.right * Input.GetAxis("Horizontal");
                 _charDirection.x = temp.x * _chSpeed;
                 _charDirection.z = temp.z * _chSpeed;
-            }
+                
+                }
 
             _charDirection.y = _gravityFoce;
             _characterController.Move(_charDirection * Time.deltaTime);
+            
+
+
         }
 
         private void CharacterGravity()
@@ -71,7 +83,10 @@ namespace FPS
             if (!_characterController.isGrounded) _gravityFoce -= 30 * Time.deltaTime;
             else _gravityFoce = -1;
             if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded)
+            {
                 _gravityFoce = chJumpForce;
+               
+            }
         }
 
         private void CharacterCrouch(bool down)
@@ -79,6 +94,7 @@ namespace FPS
 
             if (_characterController.isGrounded && down)
             {
+                
                 if (!_isCrouching)
                 {
                     _chCapsuleCollider.height = _chCapsuleCollider.height / 2f;
@@ -90,21 +106,20 @@ namespace FPS
                 }
                 else
                 {
-                    //Ray crouchRay = new Ray(_instance.position + Vector3.up * _chCapsuleCollider.radius * 0.5f,
-                    //    Vector3.up);
-                    //float crouchRayLength = _chCapsuleHeight - _chCapsuleCollider.radius * 0.5f;
-                    //if (Physics.SphereCast(crouchRay, _chCapsuleCollider.radius * 0.5f, crouchRayLength,
-                    //    Physics.AllLayers, QueryTriggerInteraction.Ignore))
-                    //{
-                    //    _isCrouching = true;
-                    //    return;
-                    //}
+                    Ray crouchRay = new Ray(_instance.position + Vector3.up * _chCapsuleCollider.radius * 0.5f,
+                        Vector3.up);
+                    float crouchRayLength = _chCapsuleHeight - _chCapsuleCollider.radius * 0.5f;
+                    if (Physics.SphereCast(crouchRay, _chCapsuleCollider.radius * 0.5f, crouchRayLength,
+                        Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                    {
+                        
+                        _isCrouching = true;
+                        return;
+                    }
                     _characterController.height = _chControllerHeight;
                     _characterController.center = _chControllerCenter;
                     _chCapsuleCollider.height = _chCapsuleHeight;
                     _chCapsuleCollider.center = _chCapsuleCenter;
-                    
-                    
                     _chSpeed = _chDefaultSpeed;
                     _isCrouching = false;
                 }
@@ -113,12 +128,13 @@ namespace FPS
 
         private void UpdateAnimator(Vector3 move)
         {
-            Debug.Log(move);
+            
             _animator.SetFloat("Strafe",move.x, 0.1f, Time.deltaTime);
             _animator.SetFloat("Move",move.z,0.1f,Time.deltaTime);// соомнительные записи
             //_animator.SetFloat("Turn",_charDirection.x,0.1f,Time.deltaTime);    //
             _animator.SetBool("Crouch",_isCrouching);
             _animator.SetBool("OnGround", _characterController.isGrounded);
+            //_animator.SetFloat("Idle",_idleatime, 0.1f, Time.deltaTime);
             if (!_characterController.isGrounded) _animator.SetFloat("Jump", _gravityFoce);// или _chJumpForce
 
             float runCycle = Mathf.Repeat(
