@@ -53,17 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\Camera\CameraController.cs" />
-     <Compile Include="Assets\Script\Controllers\BaseController.cs" />
-     <Compile Include="Assets\Script\Controllers\PlayerController.cs" />
-     <Compile Include="Assets\Script\Controllers\WeaponController.cs" />
-     <Compile Include="Assets\Script\Interface\IMove.cs" />
-     <Compile Include="Assets\Script\Main.cs" />
-     <Compile Include="Assets\Script\Model\Sword.cs" />
-     <Compile Include="Assets\Script\Model\Weapon.cs" />
-     <Compile Include="Assets\Script\Objects\BaseObjectScene.cs" />
-     <Compile Include="Assets\Script\Player\MouseMove.cs" />
-     <Compile Include="Assets\Script\Player\PlayerMove.cs" />
+     <Compile Include="Assets\MyScripts\Controllers\CharacterController.cs" />
+     <Compile Include="Assets\MyScripts\Controllers\MouseManager.cs" />
+     <Compile Include="Assets\MyScripts\Controllers\NPCController.cs" />
+     <Compile Include="Assets\MyScripts\MonoBehaviours\CharacterInventory.cs" />
+     <Compile Include="Assets\MyScripts\MonoBehaviours\CharacterStats.cs" />
+     <Compile Include="Assets\MyScripts\MonoBehaviours\ItemPickUp.cs" />
+     <Compile Include="Assets\MyScripts\ScriptableObjects\CharacterStats_SO.cs" />
+     <Compile Include="Assets\MyScripts\ScriptableObjects\ItemPickUp_SO.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/#Учеба в ГБ/Unity Projects/Unity3DLessons/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
