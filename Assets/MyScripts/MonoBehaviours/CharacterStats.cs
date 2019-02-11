@@ -43,9 +43,88 @@ public class CharacterStats : MonoBehaviour
                 characterDefinition.charExperience = 0;
                 characterDefinition.charLevel = 1;
             }
+    }
+
+
+    #endregion
+
+    #region SaveData
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(2))
+        {
+            characterDefinition.saveCharacterData();
         }
+    }
     
 
     #endregion
-    
+
+    #region Stat Increasers
+
+    public void ApplyHealth(int healthAmount)
+    {
+        characterDefinition.ApplyHealth(healthAmount);
+    }
+
+    public void ApplyMana(int manaAmount)
+    {
+        characterDefinition.ApplyMana(manaAmount);
+    }
+
+    public void GiveWealth(int wealthAmount)
+    {
+        characterDefinition.GiveWealth(wealthAmount);
+    }
+
+    #endregion
+
+    #region Weapon and Armor Change
+
+    public void ChaneWeapon(ItemPickUp weaponPickUp)
+    {
+        if (!characterDefinition.UnEquipWeapon(weaponPickUp, charInv, characterWeaponSlot))
+        {
+            characterDefinition.EquipWeapon(weaponPickUp, charInv,characterWeaponSlot);
+        }
+    }
+
+    public void ChanegArmor(ItemPickUp armorPickUp)
+    {
+        if (characterDefinition.UnEquipArmor(armorPickUp, charInv))
+        {
+            characterDefinition.EquipArmor(armorPickUp,charInv);
+        }
+    }
+    #endregion
+
+    #region Stat Reducers
+
+    public void TakeDamage(int amount)
+    {
+        characterDefinition.TakeDamage(amount);
+    }
+
+    public void TakeMana(int amount)
+    {
+        characterDefinition.TakeMana(amount);
+    }
+
+    #endregion
+
+    #region Reporters
+
+    public int GetHealth()
+    {
+        return characterDefinition.currentHealth;
+    }
+
+    public ItemPickUp GetCurrentWeapon()
+    {
+        return characterDefinition.weapon;
+    }
+
+    #endregion
+    //CharStatsSystem 11
 }
