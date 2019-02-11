@@ -108,7 +108,7 @@ public class CharacterStats_SO : ScriptableObject
 
     public void EquipArmor(ItemPickUp armorPickUp, CharacterInventory charInventory)
     {
-        switch (armorPickUp.itemDefinition.ItemArmorSubType)
+        switch (armorPickUp.itemDefinition.itemArmorSubType)
         {
             case ItemArmorSubType.Head:
                 charInventory.inventoryDisplaySlots[3].sprite = armorPickUp.itemDefinition.itemIcon;
@@ -180,7 +180,7 @@ public class CharacterStats_SO : ScriptableObject
     {
         bool prewiousArmorSame = false;
 
-        switch (armorPickUp.itemDefinition.ItemArmorSubType)
+        switch (armorPickUp.itemDefinition.itemArmorSubType)
         {
             case ItemArmorSubType.Head:
                 if (headArmor != null)
@@ -259,7 +259,8 @@ public class CharacterStats_SO : ScriptableObject
 
     private void Death()
     {
-
+        Debug.Log("YOU DIED!");
+        //Call to Game Manager for Death State to rtigger respawn
     }
 
     private void LevelUp()

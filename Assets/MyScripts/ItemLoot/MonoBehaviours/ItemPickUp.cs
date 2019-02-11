@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    public ItemPickUp_SO itemDefinition;
+  
+    public ItemPickUps_SO itemDefinition;
 
     public CharacterStats charStats;
     CharacterInventory charInventory;
