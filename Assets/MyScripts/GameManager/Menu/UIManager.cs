@@ -1,11 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 
-    class UIManager
+class UIManager: MonoBehaviour
+{
+    [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private Camera _dummyCamera;
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _mainMenu.FadeOut();
+        }
     }
+
+    public void SetDummyCameraActive(bool active)
+    {
+        _dummyCamera.gameObject.SetActive(active);
+    }
+
+}
 

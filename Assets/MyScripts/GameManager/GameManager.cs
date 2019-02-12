@@ -10,6 +10,7 @@ class GameManager:MonoBehaviour
         //generate other persistent systems
 
         private string _currentLevelName = string.Empty;
+
         List<AsyncOperation> _loadOperations;
 
 
@@ -18,7 +19,7 @@ class GameManager:MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             _loadOperations = new List<AsyncOperation>();
-
+         
             LoadLevel("Main");
         }
 

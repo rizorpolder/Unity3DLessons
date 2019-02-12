@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59793f49f255d12458f26f1e2352e988, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6e88cb0d1d70641b5a6a9904a33c73, type: 3}
   m_Name: MainCharacterStats
   m_EditorClassIdentifier: 
   setManually: 0
@@ -24,20 +24,8 @@ MonoBehaviour:
   currentDamage: 2
   baseResistance: 0
   currentResistance: 0
-  charExperience: 0
-  charLevel: 1
   maxEncumbrance: 50
   currentEncumbrance: 0
-  charLevelUps:
-  - maxHealth: 5
-    maxMana: 5
-    maxWealth: 5
-    baseDamage: 5
-    baseResistance: 5
-    maxEncumbrance: 5
-  - maxHealth: 0
-    maxMana: 0
-    maxWealth: 10
-    baseDamage: 0
-    baseResistance: 0
-    maxEncumbrance: 10
+  charExperience: 0
+  charLevel: 1
+  charLevelUps: []
