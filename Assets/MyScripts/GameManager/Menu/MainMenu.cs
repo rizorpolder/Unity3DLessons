@@ -1,46 +1,64 @@
 ﻿using UnityEngine;
 
 
-public class MainMenu:MonoBehaviour
+public class MainMenu : MonoBehaviour
     {
-        //Track Animation Component -done;
-        // Track the Animation clips for fade in/out-done;
-        //Function that can recieve animation events
-        //Functions t play fade in/out animations
-
         [SerializeField] private Animation _mainMenuAnimator;
         [SerializeField] private AnimationClip _fadeInAnimation;
         [SerializeField] private AnimationClip _fadeOutAnimation;
+
+        public Events.EventFadeComplete OnMainMenuFadeComplete;
+
+        private void Start()
+        {
+            GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+        }
         
 
         public void OnfadeOutComplete()
         {
-            Debug.LogWarning("FadeOut Complete");
+            
+            OnMainMenuFadeComplete.Invoke(true);
+
         }
 
         public void OnFadeInComplete()
         {
-            Debug.LogWarning("FadeIn Complete");
-            //UIManager.Instance.SetDummyCameraActive(true);
+            OnMainMenuFadeComplete.Invoke(false);
+            UIManager.Instance.SetDummyCameraActive(true); 
 
-    }
-
-    public void FadeIn()
-        {
-            _mainMenuAnimator.Stop();
-            _mainMenuAnimator.clip = _fadeInAnimation;
-            _mainMenuAnimator.Play();
         }
 
-        public void FadeOut()
-        {
-            //UIManager.Instance.SetDummyCameraActive(false);
+         public void HandleGameStateChanged(GameManager.GameState currentSate, GameManager.GameState previousState)
+            {
+                if (previousState == GameManager.GameState.PREGAME && currentSate == GameManager.GameState.RUNNING)
+                {
+                    FadeOut();
+                }
 
-            _mainMenuAnimator.Stop();
-            _mainMenuAnimator.clip = _fadeOutAnimation;
-            _mainMenuAnimator.Play();
-    }
-    //GameManager 08
+                if (previousState != GameManager.GameState.PREGAME && currentSate == GameManager.GameState.PREGAME)
+                {
+                    FadeIn();
+                }
+            }
+
+        public void FadeIn()
+            {
+                _mainMenuAnimator.Stop();
+                _mainMenuAnimator.clip = _fadeInAnimation;
+                _mainMenuAnimator.Play();
+            }
+
+        public void FadeOut()
+            {
+                UIManager.Instance.SetDummyCameraActive(false);
+               
+
+                _mainMenuAnimator.Stop();
+                _mainMenuAnimator.clip = _fadeOutAnimation;
+                _mainMenuAnimator.Play();
+        }
+    
 
 }
 

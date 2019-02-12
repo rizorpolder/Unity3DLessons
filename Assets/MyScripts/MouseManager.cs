@@ -12,8 +12,18 @@ public class MouseManager : MonoBehaviour
     public Texture2D doorway;
 
     public EventVector3 OnClickEnviroment;
-
     private bool _useDefaultCursor = false;
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+    }
+
+    public void HandleGameStateChanged(GameManager.GameState currentSate, GameManager.GameState previousState)
+    {
+        _useDefaultCursor = currentSate == GameManager.GameState.PAUSED;
+    }
+    
 
     private void Awake()
     {
@@ -23,6 +33,13 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
+        if (_useDefaultCursor)
+        {
+            Cursor.SetCursor(target, new Vector2(16, 16), CursorMode.Auto);
+            return;
+        }
+
+
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50, clicableLayer.value))
         {

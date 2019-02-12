@@ -401,6 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7465707196353158088}
+  - component: {fileID: 2663247287847414066}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -428,6 +429,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2663247287847414066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233136210392074658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfee13de0923654c8b0a95abe411763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResumeButton: {fileID: 8403742962510849708}
+  RestartButton: {fileID: 6854498888747687297}
+  QuitButton: {fileID: 4956165051945411724}
 --- !u!1 &5037254276585346883
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +967,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenu: {fileID: 2275801193880125261}
+  _pauseMenu: {fileID: 2663247287847414066}
+  _dummyCamera: {fileID: 7686524347757684525}
+  OnMainMenuFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+EventFadeComplete, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &7686524346871551279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1024,10 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 0}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: cd3a7154a27cac349b264a32093d18f0, type: 2}
+  - {fileID: 7400000, guid: af5d964feb87dcd49a040f93b5e3a220, type: 2}
+  - {fileID: 7400000, guid: 3739763eb096ee440a6e86f6480a786c, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1021,6 +1047,11 @@ MonoBehaviour:
   _mainMenuAnimator: {fileID: 7686524346871551277}
   _fadeInAnimation: {fileID: 7400000, guid: af5d964feb87dcd49a040f93b5e3a220, type: 2}
   _fadeOutAnimation: {fileID: 7400000, guid: cd3a7154a27cac349b264a32093d18f0, type: 2}
+  OnMainMenuFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Events+EventFadeComplete, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &7686524347223279313
 GameObject:
   m_ObjectHideFlags: 0

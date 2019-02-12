@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine.Events;
 
 
-    class Events
-    {
-    }
+public class Events
+{
+    [System.Serializable] public class EventFadeComplete : UnityEvent<bool> { }
+    [System.Serializable] public class EventGameState : UnityEvent<GameManager.GameState, GameManager.GameState> { }
+}
 
