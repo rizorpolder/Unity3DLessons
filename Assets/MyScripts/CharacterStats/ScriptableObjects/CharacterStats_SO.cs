@@ -102,7 +102,7 @@ public class CharacterStats_SO : ScriptableObject
     {
         Rigidbody newWeapon;
         weapon = weaponPickUp;
-        newWeapon = Instantiate(weaponPickUp.itemDefinition.weaponSlotObject, weaponSlot.transform);
+       // newWeapon = Instantiate(weaponPickUp.itemDefinition.weaponSlotObject, weaponSlot.transform);
         currentDamage = baseDamage + weapon.itemDefinition.itemAmount;
     }
 

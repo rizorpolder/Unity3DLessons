@@ -13,6 +13,14 @@ public class MouseManager : MonoBehaviour
 
     public EventVector3 OnClickEnviroment;
 
+    private bool _useDefaultCursor = false;
+
+    private void Awake()
+    {
+        //if (GameManager.Instance != null)
+        //    GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+    }
+
     void Update()
     {
         RaycastHit hit;
