@@ -1,11 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
-
-    public class Weapon
+[CreateAssetMenu(fileName = "Weapon.asset", menuName = "Attack/Weapon")]
+    public class Weapon:AttackDefenition
     {
+        public Rigidbody weaponPref;
+
+        public void ExecuteAttacj(GameObject attacker, GameObject defender)
+        {
+            if (defender == null) return;
+            
+            //Check if defender is in range of the attacker
+            if (Vector3.Distance(attacker.transform.position, defender.transform.position) > Range)
+            {
+                return;
+            }
+
+            //Check if defender is in front of the player
+
+            if (!attacker.transform.IsFacingTarget(defender.transform)) return;
+
+            //at this poin the attack will connect
+            var attackerStats = attacker.GetComponent<CharacterStats>();
+            var defenderStats = defender.GetComponent<CharacterStats>();
+
+            var attack = CreateAttack(attackerStats, defenderStats);
+            var attackables = defender.GetComponentsInChildren(typeof(IAttackable));
+
+            foreach (IAttackable a in attackables)
+            {
+                a.OnAttack(attacker,attack);
+            }
+           // CombatSystem m.02-Weapon
+        }
+
     }
 

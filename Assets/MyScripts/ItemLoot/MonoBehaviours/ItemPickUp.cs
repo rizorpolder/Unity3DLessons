@@ -35,7 +35,7 @@ public class ItemPickUp : MonoBehaviour
 
     public void UseItem()
     {
-        if(this)
+        if (this)
         {
             switch (itemDefinition.itemType)
             {
@@ -43,7 +43,39 @@ public class ItemPickUp : MonoBehaviour
                     charStats.ApplyHealth(itemDefinition.itemAmount);
                     Debug.Log(charStats.GetHealth());
                     break;
+                case ItemTypeDefinitions.MANA:
+                    charStats.ApplyMana(itemDefinition.itemAmount);
+                    break;
+                case ItemTypeDefinitions.WEALTH:
+                    charStats.GiveWealth(itemDefinition.itemAmount);
+                    break;
+                case ItemTypeDefinitions.WEAPON:
+                    charStats.ChaneWeapon(this);
+                    break;
+                case ItemTypeDefinitions.ARMOR:
+                    charStats.ChanegArmor(this);
+                    break;
+                    ;
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (itemDefinition.isStorable)
+            {
+                StoreItemInInventory();
+            }
+            else
+            {
+                UseItem();
+            }
+        }
+    }
+
+
+
+    
 }

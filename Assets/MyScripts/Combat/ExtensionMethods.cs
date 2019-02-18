@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
+public static class ExtensionMethods
+{
+    private const float DOT_THREASHOLD = 0.5f;
 
-    class ExtensionMethods
-    {
+    public static bool IsFacingTarget(this Transform transform, Transform target)
+
+     {
+       var vectorToTarget = target.position - transform.position;
+       vectorToTarget.Normalize();
+       float dot = Vector3.Dot(transform.forward, vectorToTarget);
+    
+       return dot>=DOT_THREASHOLD;
     }
+ }
 

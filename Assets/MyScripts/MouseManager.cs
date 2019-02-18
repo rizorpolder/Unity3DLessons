@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class MouseManager : MonoBehaviour
@@ -10,25 +8,31 @@ public class MouseManager : MonoBehaviour
     public Texture2D pointer;
     public Texture2D target;
     public Texture2D doorway;
+    public Texture2D sword;
+
 
     public EventVector3 OnClickEnviroment;
+    public EventGameObject OnClickAttackable;
+
+
     private bool _useDefaultCursor = false;
 
-    private void Start()
-    {
-        GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
-    }
-
-    public void HandleGameStateChanged(GameManager.GameState currentSate, GameManager.GameState previousState)
-    {
-        _useDefaultCursor = currentSate == GameManager.GameState.PAUSED;
-    }
+    
     
 
     private void Awake()
     {
-        //if (GameManager.Instance != null)
-        //    GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+    }
+    //private void Start()
+    //{
+    //    GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
+    //}
+
+    public void HandleGameStateChanged(GameManager.GameState currentSate, GameManager.GameState previousState)
+    {
+        _useDefaultCursor = currentSate == GameManager.GameState.PAUSED;
     }
 
     void Update()
@@ -49,10 +53,21 @@ public class MouseManager : MonoBehaviour
                 Cursor.SetCursor(doorway,new Vector2(16,16),CursorMode.Auto);
                 door = true;
             }
-            else
+
+            bool chest = false;
+            if (hit.collider.gameObject.tag == "Chest")
             {
-                Cursor.SetCursor(target,new Vector2(16,16),CursorMode.Auto );
+                Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
+                door = true;
             }
+            
+
+            bool isAttackable = hit.collider.GetComponent(typeof(IAttackable)) != null;
+            if (isAttackable)
+            {
+                Cursor.SetCursor(sword, new Vector2(16,16),CursorMode.Auto);
+            }
+
 
             if (Input.GetMouseButton(0))
             {
@@ -61,7 +76,16 @@ public class MouseManager : MonoBehaviour
                     Transform doorway = hit.collider.gameObject.transform;
                     OnClickEnviroment.Invoke(doorway.position+doorway.forward*10);
                 }
-                OnClickEnviroment.Invoke(hit.point);
+                else if (isAttackable)
+                {
+                    GameObject attackable = hit.collider.gameObject;
+                    OnClickAttackable.Invoke(attackable);
+                }
+                else if (!chest)
+                {
+                    OnClickEnviroment.Invoke(hit.point);
+                }
+                
             }
         }
         else
@@ -73,3 +97,5 @@ public class MouseManager : MonoBehaviour
 
 [System.Serializable]
 public class EventVector3 : UnityEvent<Vector3> { }
+[System.Serializable]
+public class EventGameObject : UnityEvent<GameObject> { }

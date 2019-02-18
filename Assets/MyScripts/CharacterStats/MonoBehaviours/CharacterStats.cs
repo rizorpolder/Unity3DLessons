@@ -125,6 +125,16 @@ public class CharacterStats : MonoBehaviour
         return characterDefinition.weapon;
     }
 
+    public int GetDamage()
+    {
+        return characterDefinition.currentDamage;
+    }
+
+    public float GetResistance()
+    {
+        return characterDefinition.currentResistance;
+    }
+
     #endregion
     
 }
