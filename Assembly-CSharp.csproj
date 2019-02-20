@@ -57,6 +57,7 @@
      <Compile Include="Assets\MyScripts\Character Controller\NPCController.cs" />
      <Compile Include="Assets\MyScripts\Character Controller\WayPoints.cs" />
      <Compile Include="Assets\MyScripts\CharacterStats\MonoBehaviours\CharacterStats.cs" />
+     <Compile Include="Assets\MyScripts\CharacterStats\ScriptableObjects\CharacterSaveData_SO.cs" />
      <Compile Include="Assets\MyScripts\CharacterStats\ScriptableObjects\CharacterStats_SO.cs" />
      <Compile Include="Assets\MyScripts\Combat\Attack.cs" />
      <Compile Include="Assets\MyScripts\Combat\ExtensionMethods.cs" />
@@ -92,6 +93,11 @@
      <Compile Include="Assets\MyScripts\ItemLoot\MonoBehaviours\SpawnItem.cs" />
      <Compile Include="Assets\MyScripts\ItemLoot\ScriptableObjects\ItemPickUps_SO.cs" />
      <Compile Include="Assets\MyScripts\MouseManager.cs" />
+     <Compile Include="Assets\MyScripts\Saving\Crypto.cs" />
+     <Compile Include="Assets\MyScripts\Saving\IData.cs" />
+     <Compile Include="Assets\MyScripts\Saving\JsonData.cs" />
+     <Compile Include="Assets\MyScripts\Saving\SaveData.cs" />
+     <Compile Include="Assets\MyScripts\Saving\SerializableObject.cs" />
      <Compile Include="Assets\MyScripts\SmoothFollowTarget.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/#Учеба в ГБ/Unity Projects/Unity3DLessons/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
