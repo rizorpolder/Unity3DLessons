@@ -102,10 +102,18 @@ public class CharacterStats_SO : ScriptableObject
     {
         Rigidbody newWeapon;
         weapon = weaponPickUp;
-       // newWeapon = Instantiate(weaponPickUp.itemDefinition.weaponSlotObject, weaponSlot.transform);
+        charInventory.inventoryDisplaySlots[2].sprite = weaponPickUp.itemDefinition.itemIcon;
+        newWeapon = Instantiate(weaponPickUp.itemDefinition.weaponSlotObject.weaponPref, weaponSlot.transform);
         currentDamage = baseDamage + weapon.itemDefinition.itemAmount;
     }
+    public void EquipWeapon(ItemPickUp weaponPickUp, GameObject weaponSlot)
+    {
+        Rigidbody newWeapon;
 
+        weapon = weaponPickUp;
+        newWeapon = Instantiate(weaponPickUp.itemDefinition.weaponSlotObject.weaponPref, weaponSlot.transform);
+        currentDamage = baseDamage + weapon.itemDefinition.itemAmount;
+    }
     public void EquipArmor(ItemPickUp armorPickUp, CharacterInventory charInventory)
     {
         switch (armorPickUp.itemDefinition.itemArmorSubType)
@@ -168,6 +176,8 @@ public class CharacterStats_SO : ScriptableObject
             {
                 previousWeaponSame = true;
             }
+
+            charInventory.inventoryDisplaySlots[2].sprite = null;
             Object.Destroy(weaponSlot.transform.GetChild(0).gameObject);
             weapon = null;
             currentDamage = baseDamage;
@@ -259,8 +269,19 @@ public class CharacterStats_SO : ScriptableObject
 
     private void Death()
     {
-        Debug.Log("YOU DIED!");
-        //Call to Game Manager for Death State to rtigger respawn
+        //Debug.Log("YOU DIED!");
+        ////Call to Game Manager for Death State to rtigger respawn
+        GameManager gm = GameManager.Instance;
+        if (gm != null)
+        {
+            gm.StartCoroutine(Reset(gm));
+        }
+    }
+
+    IEnumerator Reset(GameManager gm)
+    {
+        yield return  new WaitForSeconds(3);
+        gm.RestartGame();
     }
 
     private void LevelUp()

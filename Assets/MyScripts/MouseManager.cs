@@ -12,7 +12,9 @@ public class MouseManager : MonoBehaviour
 
 
     public EventVector3 OnClickEnviroment;
+    public EventVector3 OnRightClickEnviroment;
     public EventGameObject OnClickAttackable;
+    
 
 
     private bool _useDefaultCursor = false;
@@ -44,8 +46,8 @@ public class MouseManager : MonoBehaviour
         }
 
 
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 50, clicableLayer.value))
+        
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 50, clicableLayer.value))
         {
             bool door = false;
             if (hit.collider.gameObject.tag == "Doorway")
@@ -90,7 +92,7 @@ public class MouseManager : MonoBehaviour
         }
         else
         {
-            Cursor.SetCursor(pointer, new Vector2(16, 16), CursorMode.Auto);
+            Cursor.SetCursor(pointer, Vector2.zero, CursorMode.Auto);
         }
     }
 }

@@ -14,18 +14,18 @@ public class ItemPickUp : MonoBehaviour
     GameObject foundStats;
 
     #region Constructor
-
+    public ItemPickUp()
+    {
+        charInventory=CharacterInventory.instance;
+    }
     
 
     #endregion
 
     void Start()
     {
-        if (charStats == null)
-        {
             foundStats = GameObject.FindGameObjectWithTag("Player");
             charStats = foundStats.GetComponent<CharacterStats>();
-        }
     }
 
     void StoreItemInInventory()
@@ -35,8 +35,7 @@ public class ItemPickUp : MonoBehaviour
 
     public void UseItem()
     {
-        if (this)
-        {
+       
             switch (itemDefinition.itemType)
             {
                 case ItemTypeDefinitions.HEALTH:
@@ -57,7 +56,7 @@ public class ItemPickUp : MonoBehaviour
                     break;
                     ;
             }
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)

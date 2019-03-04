@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public CharacterStats_SO characterDefinitionTemplate;
     public CharacterStats_SO characterDefinition;
     public CharacterInventory charInv;
     public GameObject characterWeaponSlot;
+    public ItemPickUp defaultWeapon;
 
     #region Constructor
 
     public CharacterStats()
     {
-        //charInv = CharacterInventory.instance;
+        charInv = CharacterInventory.instance;
     }
 
     #endregion
 
     #region Initialization
     void Start()
-        {
+    {
+        if (characterDefinitionTemplate != null)
+            characterDefinition = Instantiate(characterDefinitionTemplate);
+
+
             if (!characterDefinition.setManually)
             {
                 characterDefinition.maxHealth = 100;
@@ -43,6 +49,12 @@ public class CharacterStats : MonoBehaviour
                 characterDefinition.charExperience = 0;
                 characterDefinition.charLevel = 1;
             }
+
+        if (defaultWeapon != null)
+        {
+            characterDefinition.EquipWeapon(defaultWeapon,characterWeaponSlot);
+        }
+
     }
 
 
@@ -120,9 +132,12 @@ public class CharacterStats : MonoBehaviour
         return characterDefinition.currentHealth;
     }
 
-    public ItemPickUp GetCurrentWeapon()
+    public Weapon GetCurrentWeapon()
     {
-        return characterDefinition.weapon;
+        return characterDefinition.weapon != null ? characterDefinition.weapon.itemDefinition.weaponSlotObject : null;
+
+
+
     }
 
     public int GetDamage()

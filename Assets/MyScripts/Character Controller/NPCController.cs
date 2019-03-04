@@ -7,6 +7,9 @@ public class NPCController : MonoBehaviour
     public float aggroRange = 10f;
     public Transform[] waypoints;
 
+    public AttackDefenition attack;
+    public Transform hotSpot;
+
     int index;
     float speed, agentSpeed;
     Transform player;

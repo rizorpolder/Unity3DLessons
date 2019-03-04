@@ -1,11 +1,19 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
+public class SceneLoadUtility : MonoBehaviour
+{
+    public string sceneToLoad = "Main";
 
-    class SceneLoadUtility
+    void Start()
     {
+        StartCoroutine(Load(sceneToLoad));
     }
 
+    IEnumerator Load(string sceneName)
+    {
+        yield return new WaitForEndOfFrame();
+        GameManager.Instance.LoadLevel(sceneToLoad);
+    }
+}

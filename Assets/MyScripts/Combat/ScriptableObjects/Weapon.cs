@@ -5,7 +5,7 @@
     {
         public Rigidbody weaponPref;
 
-        public void ExecuteAttacj(GameObject attacker, GameObject defender)
+        public void ExecuteAttack(GameObject attacker, GameObject defender)
         {
             if (defender == null) return;
             
@@ -30,7 +30,7 @@
             {
                 a.OnAttack(attacker,attack);
             }
-           // CombatSystem m.02-Weapon
+          
         }
 
     }

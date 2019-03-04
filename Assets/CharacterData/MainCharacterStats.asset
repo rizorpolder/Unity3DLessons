@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6e88cb0d1d70641b5a6a9904a33c73, type: 3}
   m_Name: MainCharacterStats
   m_EditorClassIdentifier: 
-  setManually: 0
+  setManually: 1
   saveDataOnClose: 1
   maxHealth: 100
-  currentHealth: 50
+  currentHealth: 100
   maxWealth: 500
   currentWealth: 0
   maxMana: 25

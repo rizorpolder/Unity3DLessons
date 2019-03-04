@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class CharacterInventory : MonoBehaviour
 {
+    #region Variable Declarations
+
     public static CharacterInventory instance;
     public CharacterStats charStats;
-
+    GameObject foundStats;
     public Image[] hotBarDisplayHolders = new Image[4];
     public GameObject InventoryDisplayHolder;
     public Image[] inventoryDisplaySlots = new Image[30];
@@ -19,6 +21,9 @@ public class CharacterInventory : MonoBehaviour
     public Dictionary<int, InventoryEntry> itemsInInventory = new Dictionary<int, InventoryEntry>();
     public InventoryEntry itemEntry;
 
+    #endregion
+
+    #region Initializations
     void Start()
     {
         instance = this;
@@ -26,10 +31,14 @@ public class CharacterInventory : MonoBehaviour
         itemEntry = new InventoryEntry(0, null, null);
         itemsInInventory.Clear();
         inventoryDisplaySlots = InventoryDisplayHolder.GetComponentsInChildren<Image>();
-
-        charStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
+        foundStats = GameObject.FindGameObjectWithTag("Player");
+        charStats = foundStats.GetComponent<CharacterStats>();
 
     }
+
+
+    #endregion
+
 
     void Update()
     {
@@ -73,6 +82,7 @@ public class CharacterInventory : MonoBehaviour
             TryPickUp();
         }
     }
+
     public void StoreItem(ItemPickUp itemToStore)
     {
         addedItem = false;
@@ -146,7 +156,8 @@ public class CharacterInventory : MonoBehaviour
     {
         itemsInInventory.Add(idCount,
             new InventoryEntry(itemEntry.stackSize, Instantiate(itemEntry.invEntry), itemEntry.hbSprite));
-        charStats.characterDefinition.currentEncumbrance += itemEntry.invEntry.itemDefinition.itemWeight;
+
+        //charStats.characterDefinition.currentEncumbrance += itemEntry.invEntry.itemDefinition.itemWeight;
         Object.Destroy(itemEntry.invEntry.gameObject);
 
         FillInventoryDisplay();

@@ -63,8 +63,10 @@ public class GameManager : Singleton<GameManager>
             if (_loadOperations.Count == 0)
             {
                 UpdateState(GameState.RUNNING);
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(_currentLevelName));
+
             }
-           
+
         }
         Debug.Log("LoadComplete");
     }
